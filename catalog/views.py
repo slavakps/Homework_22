@@ -1,16 +1,34 @@
-from django.shortcuts import render
-from .models import Product
-
-def home(request):
-    products = Product.objects.all()
-    return render(request, 'home.html', {'products': products})
-
-def contacts(request):
-    return render(request, "contacts.html")
-
-def product_detail(request, product_id):
-    product = Product.objects.get(id=product_id)
-    context = {'product': product}
-    return render(request, 'product_detail.html', context)
+from django.views.generic import ListView, DetailView, TemplateView
+from .models import Product, Category
 
 
+class ProductListView(ListView):
+    model = Product
+    template_name = 'home.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Skystore - Главная'
+        return context
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'product_detail.html'
+    context_object_name = 'product'
+    pk_url_kwarg = 'pk'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = f'{self.object.name} - Skystore'
+        return context
+
+
+class ContactsTemplateView(TemplateView):
+    template_name = 'contacts.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Контакты - Skystore'
+        return context
