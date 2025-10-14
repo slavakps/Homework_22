@@ -4,57 +4,67 @@
 {% block title %}Главная - Skystore{% endblock %}
 
 {% block content %}
-<div class="row mb-4">
-    <div class="col-12">
-        <h2 class="text-center">Наши товары</h2>
-    </div>
+<!-- Заголовок -->
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-center mb-0">Наши товары</h2>
+    <a href="{% url 'catalog:product_create' %}" class="btn btn-primary">+ Добавить товар</a>
 </div>
 
+<!-- Список товаров -->
 <div class="row">
     {% for product in products %}
     <div class="col-lg-4 col-md-6 mb-4">
         <div class="card product-card h-100">
+            <!-- Изображение товара -->
             {% if product.image %}
                 <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" style="height: 200px; object-fit: cover;">
             {% else %}
-                <img src="{% static 'images/no-image.jpg' %}" class="card-img-top" alt="Нет изображения" style="height: 200px; object-fit: cover;">
+                <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
+                    <span class="text-muted">Нет изображения</span>
+                </div>
             {% endif %}
 
             <div class="card-body d-flex flex-column">
+                <!-- Категория -->
                 <div class="mb-2">
                     <span class="badge bg-secondary">{{ product.category.name }}</span>
                 </div>
 
+                <!-- Название товара -->
                 <h5 class="card-title">
-                    <a href="{% url 'catalog:product_detail' product.id %}" class="text-decoration-none text-dark">
+                    <a href="{% url 'catalog:product_detail' product.pk %}" class="text-decoration-none text-dark">
                         {{ product.name }}
                     </a>
                 </h5>
 
+                <!-- Описание -->
                 <p class="card-text flex-grow-1">
                     {{ product.description|truncatechars:100 }}
                 </p>
 
+                <!-- Цена и кнопка -->
                 <div class="mt-auto">
                     <div class="d-flex justify-content-between align-items-center">
                         <h5 class="text-success mb-0">{{ product.price }} ₽</h5>
-                        <a href="{% url 'catalog:product_detail' product.id %}" class="btn btn-primary btn-sm">
+                        <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-primary btn-sm">
                             Подробнее
                         </a>
                     </div>
                 </div>
             </div>
 
+            <!-- Дата создания -->
             <div class="card-footer">
                 <small class="text-muted">Добавлен: {{ product.created_at|date:"d.m.Y" }}</small>
             </div>
         </div>
     </div>
     {% empty %}
+    <!-- Если товаров нет -->
     <div class="col-12 text-center">
         <div class="alert alert-info">
             <h4>Товаров пока нет</h4>
-            <p>Но скоро они появятся!</p>
+            <p>Но скоро они появятся! <a href="{% url 'catalog:product_create' %}">Добавьте первый товар</a></p>
         </div>
     </div>
     {% endfor %}
