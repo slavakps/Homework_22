@@ -6,7 +6,7 @@ from .models import BlogPost
 class BlogPostListView(ListView):
     """Список всех блоговых записей"""
     model = BlogPost
-    template_name = 'blog/blogpost_list.html'
+    template_name = 'blogpost_list.html'
     context_object_name = 'posts'
 
     def get_queryset(self):
@@ -17,7 +17,7 @@ class BlogPostListView(ListView):
 class BlogPostDetailView(DetailView):
     """Детальная страница блоговой записи"""
     model = BlogPost
-    template_name = 'blog/blogpost_detail.html'
+    template_name = 'blogpost_detail.html'
     context_object_name = 'post'
 
     def get_object(self, queryset=None):
@@ -31,7 +31,7 @@ class BlogPostDetailView(DetailView):
 class BlogPostCreateView(CreateView):
     """Создание новой блоговой записи"""
     model = BlogPost
-    template_name = 'blog/blogpost_form.html'
+    template_name = 'blogpost_form.html'
     fields = ['title', 'content', 'preview', 'is_published']
     success_url = reverse_lazy('blog:post_list')
 
@@ -43,7 +43,7 @@ class BlogPostCreateView(CreateView):
 class BlogPostUpdateView(UpdateView):
     """Редактирование блоговой записи"""
     model = BlogPost
-    template_name = 'blog/blogpost_form.html'
+    template_name = 'blogpost_form.html'
     fields = ['title', 'content', 'preview', 'is_published']
 
     def get_success_url(self):
@@ -53,10 +53,8 @@ class BlogPostUpdateView(UpdateView):
 class BlogPostDeleteView(DeleteView):
     """Удаление блоговой записи"""
     model = BlogPost
-    template_name = 'blog/blogpost_confirm_delete.html'
+    template_name = 'blogpost_confirm_delete.html'
     success_url = reverse_lazy('blog:post_list')
 
-
-from django.shortcuts import render
 
 # Create your views here.
