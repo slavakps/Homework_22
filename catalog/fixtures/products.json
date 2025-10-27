@@ -1,0 +1,28 @@
+﻿[
+{
+  "model": "catalog.product",
+  "pk": 2,
+  "fields": {
+    "name": "╘єЄсюыър",
+    "description": "╒ыюяъютр  ЇєЄсюыър",
+    "image": "",
+    "category": 5,
+    "price": "39.99",
+    "created_at": "2025-10-02T15:05:37.322Z",
+    "updated_at": "2025-10-02T15:09:32.130Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 3,
+  "fields": {
+    "name": "Django фы  яЁюЇхёёшюэрыют",
+    "description": "╧ЁюфтшэєЄр  ъэшур яю Django",
+    "image": "",
+    "category": 3,
+    "price": "59.99",
+    "created_at": "2025-10-02T15:05:49.714Z",
+    "updated_at": "2025-10-02T15:05:49.714Z"
+  }
+}
+]

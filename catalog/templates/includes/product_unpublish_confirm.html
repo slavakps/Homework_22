@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block title %}Отмена публикации - {{ product.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-warning text-dark">
+                    <h4 class="mb-0">Отмена публикации продукта</h4>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-warning">
+                        <h5 class="alert-heading">Внимание!</h5>
+                        <p class="mb-0">Вы собираетесь отменить публикацию продукта. После этого продукт станет недоступен для покупателей.</p>
+                    </div>
+
+                    <div class="mb-4">
+                        <h5>Информация о продукте:</h5>
+                        <div class="card">
+                            <div class="card-body">
+                                <h6 class="card-title">{{ product.name }}</h6>
+                                <p class="card-text">{{ product.description|truncatewords:30 }}</p>
+                                <div class="d-flex justify-content-between">
+                                    <span class="text-muted">Категория: {{ product.category.name }}</span>
+                                    <span class="fw-bold text-success">{{ product.price }} ₽</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="d-flex gap-2">
+                            <button type="submit" class="btn btn-warning">
+                                Да, отменить публикацию
+                            </button>
+                            <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-secondary">
+                                Нет, вернуться назад
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

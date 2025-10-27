@@ -1,0 +1,50 @@
+﻿[
+{
+  "model": "catalog.category",
+  "pk": 1,
+  "fields": {
+    "name": "▌ыхъЄЁюэшър",
+    "description": "Єхїэшър ш урфцхЄЇ"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 2,
+  "fields": {
+    "name": "╩эшуш",
+    "description": "єўхсэшъш ш ¤эЎшъыюяхфшш"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 3,
+  "fields": {
+    "name": "╩эшуш",
+    "description": "╩эшуш ш єўхсэшъш"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 4,
+  "fields": {
+    "name": "╤яюЁЄ",
+    "description": "╤яюЁЄштэ√х ЄютрЁ√"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 5,
+  "fields": {
+    "name": "╬фхцфр",
+    "description": "╬фхцфр ш ръёхёёєрЁ√"
+  }
+},
+{
+  "model": "catalog.category",
+  "pk": 6,
+  "fields": {
+    "name": "▌ыхъЄЁюэшър",
+    "description": "╥хїэшър ш урфцхЄ√"
+  }
+}
+]
