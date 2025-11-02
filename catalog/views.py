@@ -8,12 +8,24 @@ from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.shortcuts import render, get_object_or_404
 from .services import get_products_by_category
+from django.core.cache import cache
 
 @method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductListView(ListView):
     model = Product
     template_name = 'home.html'
     context_object_name = 'products'
+
+    def get_queryset(self):
+        """Кешируем запрос к базе данных"""
+        cache_key = 'published_products'
+        products = cache.get(cache_key)
+
+        if not products:
+            products = Product.objects.filter(is_published=True).select_related('category')
+            cache.set(cache_key, products, 60 * 15)
+
+        return products
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
