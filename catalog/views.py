@@ -2,10 +2,14 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.exceptions import PermissionDenied
-from .models import Product
+from .models import Product, Category
 from .forms import ProductForm
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.shortcuts import render, get_object_or_404
+from .services import get_products_by_category
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductListView(ListView):
     model = Product
     template_name = 'home.html'
@@ -16,7 +20,7 @@ class ProductListView(ListView):
         context['title'] = 'Skystore - Главная'
         return context
 
-
+@method_decorator(cache_page(60 * 15), name='dispatch')
 class ProductDetailView(DetailView):
     model = Product
     template_name = 'product_detail.html'
@@ -115,3 +119,14 @@ class ContactsTemplateView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Контакты - Skystore'
         return context
+
+
+def category_products(request, category_id):
+    """представление для продуктов категории"""
+    category = get_object_or_404(Category, id=category_id)
+    products = get_products_by_category(category_id)
+
+    return render(request, 'catalog/category_products.html', {
+        'category': category,
+        'products': products
+    })

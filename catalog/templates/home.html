@@ -30,6 +30,13 @@
                     <span class="badge bg-secondary">{{ product.category.name }}</span>
                 </div>
 
+                <small class="text-muted">
+                    <a href="{% url 'catalog:category_products' product.category.id %}" class="text-decoration-none">
+                    Все товары этой категории →
+                    </a>
+                </small>
+
+
                 <!-- Название товара -->
                 <h5 class="card-title">
                     <a href="{% url 'catalog:product_detail' product.pk %}" class="text-decoration-none text-dark">
